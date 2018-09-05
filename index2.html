@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>拖拽效果</title>
+</head>
+<style type="text/css">
+	.box{
+		width: 200px;
+		height: 200px;
+		border: 1px solid red;
+		position: fixed;
+		top: 0;
+		left: 0;
+	}
+</style>
+<body>
+	<div class="box">
+		
+	</div>
+</body>
+</html>
+<script type="text/javascript">
+	let box = document.querySelector(".box")
+	box.onmousedown = function(event){
+		event = event || window.event;
+		let x0 = event.clientX;
+		let y0 = event.clientY;
+		x2 = this.offsetLeft;
+		y2 = this.offsetTop;
+		box.onmousemove = function(event1){
+			event = event1 || window.event;
+			let x1 = event.clientX;
+			let y1 = event.clientY;
+			x = x1-x0+x2;
+			y = y1-y0+y2;
+			this.style = `top:${y}px;left:${x}px`
+		}
+		box.onmouseup = function(){
+			box.onmousemove = "";
+			box.onmouseup = "";
+		}
+	}
+</script>
