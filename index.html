@@ -6,8 +6,23 @@
 	<!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
 	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
+<style type="text/css">
+	.add{
+		display: block;
+		width: 100px;
+		height: 40px;
+		background-color: #000;
+		color: #fff;
+		text-align: center;
+		line-height: 40px;
+		outline: none;
+		border: 0;
+		border-radius: 5px;
+	}
+</style>
 <body>
 	<table class="table table-striped table-bordered">
+		<tr class="nodbl"><td class="nodbl"><button class="add">增加一行</button></td></tr>
 		<tr>
 			<td>1</td>
 			<td>2</td>
@@ -18,7 +33,7 @@
 			<td>7</td>
 			<td>8</td>
 			<td>9</td>
-			<td><button type="button" class="btn btn-danger">删除</button></td>
+			<td class="nodbl"><button type="button" class="btn btn-danger">删除</button></td>
 		</tr>
 		<tr>
 			<td>1</td>
@@ -30,7 +45,7 @@
 			<td>7</td>
 			<td>8</td>
 			<td>9</td>
-			<td><button type="button" class="btn btn-danger">删除</button></td>
+			<td class="nodbl"><button type="button" class="btn btn-danger">删除</button></td>
 		</tr>
 		<tr>
 			<td>1</td>
@@ -42,7 +57,7 @@
 			<td>7</td>
 			<td>8</td>
 			<td>9</td>
-			<td><button type="button" class="btn btn-danger">删除</button></td>
+			<td class="nodbl"><button type="button" class="btn btn-danger">删除</button></td>
 		</tr>
 		<tr>
 			<td>1</td>
@@ -54,37 +69,64 @@
 			<td>7</td>
 			<td>8</td>
 			<td>9</td>
-			<td><button type="button" class="btn btn-danger">删除</button></td>
+			<td class="nodbl"><button type="button" class="btn btn-danger">删除</button></td>
 		</tr>
 	</table>
 </body>
 </html>
 <script type="text/javascript">
 	let tds = document.querySelectorAll("td")
-	
-	tds.forEach((item,index)=>{
-		item.ondblclick = function(){
-			if(item.firstElementChild){
+	let table = document.querySelector("table")
+	let add = document.querySelector(".add")
+	let shanchus = document.querySelectorAll(".btn");
+	let tables = document.querySelector("tbody")
+	// console.log(table,add)
+	table.ondblclick = function(event){
+		console.log(event.target.className)
+		if(event.target.nodeName=="BUTTON" || event.target.className=="nodbl" || event.target.className=="table table-striped table-bordered"){
 				return;
-			}else{
-				let input = document.createElement("input");
-				input.value = item.innerText;
-				item.innerText = "";
-				item.appendChild(input);
-				input.focus();
-				input.onblur = function(){
-					value = this.value;
-					item.innerText = value;
-				}
+		}else{
+			let input = document.createElement("input");
+			input.value = event.target.innerText;
+			event.target.innerText = "";
+			event.target.appendChild(input);
+			input.focus();
+			input.onblur = function(){
+				value = this.value;
+				event.target.innerText = value;
 			}
 		}
-	})
-	let shanchus = document.querySelectorAll("button");
-	let tables = document.querySelector("tbody")
-	console.log(tds,shanchus,tables)
-	shanchus.forEach((item,index)=>{
-		item.onclick=function(){
-			tables.removeChild(item.parentNode.parentNode)
+	}
+	table.onclick = function(event){
+		// console.log(event.target)
+		if(event.target.className=="add"){
+			let trr = document.createElement("tr");
+			trr.innerHTML = `<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="nodbl"><button type="button" class="btn btn-danger">删除</button></td>`;
+			tables.appendChild(trr);
+		}else if(event.target.className=="btn btn-danger"){
+			event.target.parentNode.parentNode.parentNode.removeChild(event.target.parentNode.parentNode)
 		}
-	})
+	}
+
+		
+	
+
+	// tds.forEach((item,index)=>{
+	// 	item.ondblclick = function(){
+	// 		if(item.firstElementChild){
+	// 			return;
+	// 		}else{
+	// 			let input = document.createElement("input");
+	// 			input.value = item.innerText;
+	// 			item.innerText = "";
+	// 			item.appendChild(input);
+	// 			input.focus();
+	// 			input.onblur = function(){
+	// 				value = this.value;
+	// 				item.innerText = value;
+	// 			}
+	// 		}
+	// 	}
+	// })
+	
 </script>

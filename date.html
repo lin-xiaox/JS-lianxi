@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>时钟</title>
+</head>
+<style type="">
+*{
+	margin: 0;
+	padding: 0;
+}
+.timeBox{
+	width: 150px;
+	height: 40px;
+	border: 3px solid red;
+	line-height: 40px;
+	display: flex;
+	justify-content: space-around;
+	border-radius: 5px;
+	margin: 50px auto;
+}
+.clock{
+	width: 300px;
+	height: 300px;
+	border-radius: 50%;
+	border: 2px solid red;
+	margin:  0 auto;
+	position: relative;
+}
+.clock div{
+	position: absolute;
+	width: 300px;
+	height: 300px;
+	border-radius: 50%;
+	transition: all 1s;
+}
+.clock .hbox span{
+	display: block;
+	width: 4px;
+	height: 80px;
+	background-color: black;
+	position: absolute;
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+	top: 70px;
+}
+.clock .mbox span{
+	display: block;
+	width: 2px;
+	height: 120px;
+	background-color: green;
+	position: absolute;
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+	top: 30px;
+}
+.clock .sbox span{
+	display: block;
+	width: 1px;
+	height: 145px;
+	background-color: red;
+	position: absolute;
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+	top: 5px;
+}
+</style>
+<body>
+	<div class="timeBox">
+		<span id="hours">08</span>时
+		<span id="min">12</span>分
+		<span id="sec">20</span>秒
+	</div>
+	<div class="clock">
+		<div class="hbox">
+			<span></span>
+		</div>
+		<div class="mbox">
+			<span></span>
+		</div>
+		<div class="sbox">
+			<span></span>
+
+		</div>
+	</div>
+</body>
+</html>
+<script type="text/javascript">
+	let hour = document.querySelector("#hours")
+	let min = document.querySelector("#min")
+	let sec = document.querySelector("#sec")
+	console.log(hour,min,sec)
+	function fu(){
+		let date = new Date();
+		let h1 = date.getHours();
+		let m1 = date.getMinutes();
+		let s1 = date.getSeconds();
+		hour.innerText = h1;
+		min.innerText = m1;
+		sec.innerText = s1;
+	}
+	fu()
+	let t1 = setInterval(fu,1000)
+
+	let hbox = document.querySelector(".hbox")
+	let mbox = document.querySelector(".mbox")
+	let sbox = document.querySelector(".sbox")
+	console.log(hbox,mbox,sbox)
+
+	function fu1(){
+		let date2 = new Date();
+		let h2 = date2.getHours();
+		let m2 = date2.getMinutes();
+		let s2 = date2.getSeconds();
+		hbox.style.transform=`rotate(${30*h2+0.5*m2}deg)`;
+		mbox.style.transform=`rotate(${6*m2}deg)`;
+		sbox.style.transform=`rotate(${6*s2}deg)`;
+		console.log(1)
+	}
+	fu1()
+	let t2 = setInterval(fu1,10)
+</script>
